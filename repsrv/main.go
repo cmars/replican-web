@@ -25,12 +25,13 @@ func main() {
 		os.Exit(1)
 	}
 	
-	mux.HandleFunc(fmt.Sprintf("/%s", web.NODEROOT), srv.TreeHandler(local))
-	mux.HandleFunc(fmt.Sprintf("/%s/{strong}", web.BLOCKS), srv.BlockHandler(local))
-	mux.HandleFunc(fmt.Sprintf("/%s/{strong}/{offset}/{length}", web.FILES),
+	var router = new(mux.Router)
+	router.HandleFunc(fmt.Sprintf("/%s", web.NODEROOT), srv.TreeHandler(local))
+	router.HandleFunc(fmt.Sprintf("/%s/{strong}", web.BLOCKS), srv.BlockHandler(local))
+	router.HandleFunc(fmt.Sprintf("/%s/{strong}/{offset}/{length}", web.FILES),
 		srv.FileHandler(local))
 	
-	http.Handle("/", mux.DefaultRouter)
+	http.Handle("/", router)
 	http.ListenAndServe(":8080", nil)
 }
 
