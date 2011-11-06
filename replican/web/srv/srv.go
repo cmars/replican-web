@@ -23,7 +23,7 @@ func setBinaryResp(resp http.ResponseWriter) {
 	resp.Header().Add("Content-Transfer-Encoding", "binary")
 }
 
-func TreeHandler(store *fs.LocalStore) http.HandlerFunc {
+func TreeHandler(store fs.LocalStore) http.HandlerFunc {
 	return func(resp http.ResponseWriter, req *http.Request) {
 		setBinaryResp(resp)
 
@@ -42,7 +42,7 @@ func TreeHandler(store *fs.LocalStore) http.HandlerFunc {
 	}
 }
 
-func BlockHandler(store *fs.LocalStore) http.HandlerFunc {
+func BlockHandler(store fs.LocalStore) http.HandlerFunc {
 	return func(resp http.ResponseWriter, req *http.Request) {
 		setBinaryResp(resp)
 
@@ -68,7 +68,7 @@ func BlockHandler(store *fs.LocalStore) http.HandlerFunc {
 	}
 }
 
-func FileHandler(store *fs.LocalStore) http.HandlerFunc {
+func FileHandler(store fs.LocalStore) http.HandlerFunc {
 	return func(resp http.ResponseWriter, req *http.Request) {
 		setBinaryResp(resp)
 
